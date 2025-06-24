@@ -63,8 +63,8 @@ class VideoFrameComparer(QWidget):
         self.image_view1 = ZoomPanGraphicsView()
         self.image_view2 = ZoomPanGraphicsView()
 
-        self.save_button = QPushButton("Save Annotation")
-        self.save_button.clicked.connect(self.export_annotations_manual)
+        self.save_button = QPushButton("Save Frames")
+        self.save_button.clicked.connect(self.export_frames)
 
         main_layout = QVBoxLayout()
 
@@ -189,32 +189,7 @@ class VideoFrameComparer(QWidget):
         new_index = min(self.total_frames - self.offset - 1, self.frame_index + 1)
         self.slider.setValue(new_index)
 
-    def export_annotations_automate(self):
-        """
-        Automatically exports annotations for selected pairs of video frames.
-        For every 10-frame interval, it retrieves two frames (frame_i and frame_{i+10})
-        and exports their annotation data using the configured exporter.
-        """
-        export_dir = QFileDialog.getExistingDirectory(self, "Select Export Directory")
-        if not export_dir:
-            QMessageBox.warning(self, "Error", "No export directory selected.")
-            return
-
-        if self.cap is None:
-            QMessageBox.warning(self, "Error", "No video loaded.")
-            return
-
-        total_pairs = 20  # Step of 10
-        for i in range(0, total_pairs * 10, 10):
-            frame1 = self.get_frame(i)
-            frame2 = self.get_frame(i + 10)
-            if frame1 is None or frame2 is None:
-                print(f"Skipping pair {i}-{i+10} due to frame retrieval failure.")
-                continue
-            self.exporter.export(self.idx_count, frame1, frame2, export_dir)
-            self.idx_count+=1;
-
-    def export_annotations_manual(self):
+    def export_frames(self):
         """
         Mannually select frame pairs and exports their annotation data using the configured exporter.
         """
