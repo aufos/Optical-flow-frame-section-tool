@@ -18,7 +18,7 @@ They follow the official [KITTI optical flow format](http://www.cvlibs.net/datas
 ## 📚 Paper
 
 This tool and dataset were developed as part of our research project on real-world evaluation of optical flow with varying lighting conditions.
-The paper will be available at: Link to be added.
+The paper will be available at: https://resolver.tudelft.nl/uuid:7ad41253-902a-4d78-a86a-c7bee94b9e0c.
 <!-- **[your-paper-link-here]** -->
 
 ---
